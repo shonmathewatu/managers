@@ -93,3 +93,114 @@ column_summary
 # This row cannot be added to the data frame as there are missing 
 # values for some columns, and the row must match the data frame 
 # structure
+
+#listwise deletion
+
+new_data <- na.omit(managers_data)
+
+new_data
+
+#use the complex cases 
+
+complete_data <- complete.cases(managers_data)
+
+complete_data
+
+# show the sum of complete rows
+
+sum(complete_data)
+
+
+#list the data that doesnot have missing values
+
+
+complete_data <- managers_data[complete.cases(managers_data),]
+complete_data
+
+#find the sum of the missing value in the age attribute
+sum(is.na(managers_data$Age))
+sum(!complete.cases(managers_data$Age))
+
+
+#find the mean of the missing value in the age attribute
+mean(is.na(managers_data$Age))
+mean(!complete.cases(managers_data$Age))
+
+install.packages("mice")
+library(mice)
+md.pattern(managers_data)
+
+
+#sue the VIM Package
+
+install.packages("VIM")
+library(VIM)
+missing_values <- aggr(managers_data,
+                       prop = FALSE,
+                       numbers = TRUE)
+
+summary(missing_values)
+
+matrixplot(managers_data)
+
+#extract q1 and age from managers data
+
+# create vector of what we want to extract
+# then use indexer to extract them
+
+names(managers_data)
+
+include_list <- names(managers_data)
+include_list
+class(include_list)
+include_list <- names(managers_data) 
+
+include_list
+new_data <- managers_data[names(managers_data) ]
+new_data
+
+new_data <- subset(managers_data, select= c("age"."Q1"))
+new_data
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# extract all records where age <45 and >24
+# and only list gender and age
+
+attach(managers_data)
+new_data <- subset(managers_data, Age < 35 | Age >24, select = c("gender"))
+
+
+
